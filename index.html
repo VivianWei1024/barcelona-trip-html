@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>¡Hola Barcelona!｜10.3–10.5 巴塞罗那3日行程</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Noto+Sans+SC:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --red: #b22234;
+      --gold: #f4b400;
+      --blue: #0d3b66;
+      --sea: #2a9d8f;
+      --sand: #f7f1e3;
+      --orange: #e76f51;
+      --ink: #1f2937;
+      --muted: #6b7280;
+      --card: rgba(255,255,255,.82);
+      --shadow: 0 16px 40px rgba(13,59,102,.14);
+      --radius: 24px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Noto Sans SC', sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(244,180,0,.12), transparent 28%),
+        radial-gradient(circle at top right, rgba(42,157,143,.12), transparent 26%),
+        linear-gradient(180deg, #fffdf8 0%, #fff 100%);
+    }
+
+    .hero {
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(rgba(10,25,47,.35), rgba(10,25,47,.52)),
+        url('https://images.unsplash.com/photo-1583422409516-2895a77efded?ixlib=rb-4.0.3&auto=format&fit=crop&w=1800&q=80') center/cover no-repeat;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 48px 20px 96px;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 120px;
+      background: linear-gradient(to top, #fffdf8, transparent);
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 980px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.16);
+      border: 1px solid rgba(255,255,255,.28);
+      backdrop-filter: blur(8px);
+      font-size: 14px;
+      letter-spacing: .08em;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(44px, 8vw, 88px);
+      margin: 18px 0 12px;
+      line-height: 1.02;
+      text-shadow: 0 8px 28px rgba(0,0,0,.18);
+    }
+
+    .subtitle {
+      font-size: clamp(18px, 2.4vw, 28px);
+      font-weight: 700;
+      margin: 0 0 12px;
+    }
+
+    .desc {
+      max-width: 760px;
+      margin: 0 auto;
+      font-size: 17px;
+      line-height: 1.9;
+      color: rgba(255,255,255,.92);
+    }
+
+    .hero-stats {
+      margin-top: 28px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .hero-stat {
+      min-width: 150px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.16);
+      border: 1px solid rgba(255,255,255,.22);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-stat b {
+      display: block;
+      font-size: 28px;
+      margin-bottom: 4px;
+    }
+
+    .shell {
+      width: min(1180px, calc(100% - 28px));
+      margin: -56px auto 60px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .quick-nav {
+      position: sticky;
+      top: 14px;
+      z-index: 30;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 0 0 18px;
+      padding: 12px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.84);
+      border: 1px solid rgba(255,255,255,.72);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 24px rgba(13,59,102,.10);
+    }
+
+    .quick-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 14px;
+      border-radius: 999px;
+      text-decoration: none;
+      color: var(--blue);
+      background: #fff;
+      border: 1px solid rgba(13,59,102,.10);
+      font-size: 14px;
+      font-weight: 800;
+      transition: transform .2s ease, background .2s ease, color .2s ease;
+    }
+
+    .quick-link:hover {
+      transform: translateY(-2px);
+      background: var(--blue);
+      color: #fff;
+    }
+
+    .index {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-bottom: 44px;
+    }
+
+    .index-card {
+      text-decoration: none;
+      color: inherit;
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,.7);
+      backdrop-filter: blur(10px);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .index-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 22px 48px rgba(13,59,102,.18);
+    }
+
+    .index-cover {
+      height: 160px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .index-day {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: rgba(178,34,52,.92);
+      color: #fff;
+      font-weight: 800;
+      font-size: 13px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      letter-spacing: .06em;
+    }
+
+    .index-body { padding: 18px 18px 20px; }
+    .index-body h3 { margin: 0 0 8px; font-size: 22px; color: var(--blue); }
+    .index-body p { margin: 0; color: var(--muted); line-height: 1.8; }
+    .chips { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #fff4dd;
+      color: #9a5b00;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .panel {
+      background: rgba(255,255,255,.78);
+      border: 1px solid rgba(255,255,255,.8);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 28px;
+      margin-bottom: 34px;
+      backdrop-filter: blur(10px);
+    }
+
+    .panel h2 {
+      margin: 0 0 10px;
+      font-family: 'Playfair Display', serif;
+      font-size: 34px;
+      color: var(--blue);
+    }
+
+    .panel-lead {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.9;
+    }
+
+    .overview-grid {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .overview-item {
+      background: white;
+      border-radius: 20px;
+      padding: 18px;
+      border: 1px solid #f3efe7;
+    }
+
+    .overview-item b {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--blue);
+      font-size: 18px;
+    }
+
+    .overview-item span {
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    .day {
+      scroll-margin-top: 28px;
+      margin-bottom: 42px;
+    }
+
+    .day-hero {
+      min-height: 280px;
+      border-radius: 30px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      padding: 28px;
+      color: white;
+      box-shadow: var(--shadow);
+      background-size: cover;
+      background-position: center;
+    }
+
+    .day-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(10,25,47,.12), rgba(10,25,47,.68));
+    }
+
+    .day-hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+    }
+
+    .day-tag {
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.18);
+      border: 1px solid rgba(255,255,255,.24);
+      margin-bottom: 12px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .06em;
+    }
+
+    .day-hero h3 {
+      margin: 0 0 8px;
+      font-size: clamp(30px, 4vw, 46px);
+      line-height: 1.08;
+    }
+
+    .day-hero p {
+      margin: 0;
+      line-height: 1.9;
+      color: rgba(255,255,255,.92);
+    }
+
+    .timeline {
+      margin-top: 18px;
+      position: relative;
+      padding-left: 30px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      bottom: 10px;
+      width: 3px;
+      border-radius: 3px;
+      background: linear-gradient(180deg, var(--red), var(--gold), var(--sea));
+    }
+
+    .event {
+      position: relative;
+      background: white;
+      border-radius: 24px;
+      padding: 20px 20px 18px;
+      margin: 0 0 18px;
+      box-shadow: 0 10px 30px rgba(13,59,102,.08);
+      border: 1px solid #f3efe7;
+    }
+
+    .event::before {
+      content: "";
+      position: absolute;
+      left: -27px;
+      top: 28px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--red);
+      box-shadow: 0 0 0 5px #fff2f5;
+    }
+
+    .time {
+      display: inline-block;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--red), #d64550);
+      color: white;
+      font-weight: 800;
+      font-size: 13px;
+      letter-spacing: .03em;
+      margin-bottom: 10px;
+    }
+
+    .event h4 {
+      margin: 0 0 8px;
+      font-size: 24px;
+      color: var(--blue);
+    }
+
+    .meta {
+      color: var(--orange);
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .event p {
+      margin: 0;
+      color: #4b5563;
+      line-height: 1.9;
+    }
+
+    .tips {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .tip {
+      border-radius: 16px;
+      padding: 14px;
+      background: #fff9ef;
+      border: 1px solid #f7ead0;
+      font-size: 14px;
+      color: #7a5a1f;
+      line-height: 1.8;
+    }
+
+    .tip b {
+      display: block;
+      color: #8b5e00;
+      margin-bottom: 4px;
+    }
+
+
+    .food-grid, .practical-grid {
+      display: grid;
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .food-grid { grid-template-columns: repeat(3, 1fr); }
+    .practical-grid { grid-template-columns: repeat(4, 1fr); }
+
+    .food-card, .practical-card {
+      background: white;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid #f3efe7;
+      box-shadow: 0 10px 28px rgba(13,59,102,.08);
+    }
+
+    .food-cover, .practical-cover {
+      height: 160px;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .food-body, .practical-body { padding: 16px 18px 18px; }
+    .food-body h4, .practical-body h4 {
+      margin: 0 0 8px;
+      color: var(--blue);
+      font-size: 20px;
+    }
+
+    .food-body p, .practical-body p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    .footer {
+      padding: 30px 20px 70px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .footer b {
+      display: block;
+      color: var(--blue);
+      font-size: 24px;
+      margin-bottom: 8px;
+      font-family: 'Playfair Display', serif;
+    }
+
+    @media (max-width: 1024px) {
+      .index,
+      .food-grid,
+      .practical-grid,
+      .tips,
+      .overview-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .hero-stats,
+      .index,
+      .food-grid,
+      .practical-grid,
+      .tips,
+      .overview-grid {
+        grid-template-columns: 1fr;
+      }
+      .timeline { padding-left: 22px; }
+      .event::before { left: -21px; }
+      .shell { margin-top: -44px; }
+      .panel { padding: 20px; }
+      .day-hero { min-height: 240px; padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="top"></div>
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="badge">BARCELONA · OCT 3 – OCT 5 · 国庆特别版</div>
+      <h1>¡Hola Barcelona!</h1>
+      <p class="subtitle">3天把巴塞罗那过成一场高迪、海风与美食交织的小电影</p>
+      <p class="desc">
+        这不是一份普通行程单，而是一份会让同行人一看就开始期待的旅行邀请函：白天看圣家堂的光影、傍晚吹 Barceloneta 的海风、晚上在老城里吃一顿加泰罗尼亚风味晚餐。
+      </p>
+      <div class="hero-stats">
+        <div class="hero-stat"><b>3</b><span>高能旅行日</span></div>
+        <div class="hero-stat"><b>10+</b><span>景点与体验</span></div>
+        <div class="hero-stat"><b>72h</b><span>城市交通卡</span></div>
+        <div class="hero-stat"><b>∞</b><span>期待值拉满</span></div>
+      </div>
+    </div>
+  </section>
+
+  <main class="shell">
+    <nav class="quick-nav">
+      <button class="quick-link" type="button" onclick="scrollToSection('top')">回到顶部</button>
+      <button class="quick-link" type="button" onclick="scrollToSection('index')">行程索引</button>
+      <button class="quick-link" type="button" onclick="scrollToSection('day1')">DAY 1</button>
+      <button class="quick-link" type="button" onclick="scrollToSection('day2')">DAY 2</button>
+      <button class="quick-link" type="button" onclick="scrollToSection('day3')">DAY 3</button>
+      <button class="quick-link" type="button" onclick="scrollToSection('food')">吃什么</button>
+      <button class="quick-link" type="button" onclick="scrollToSection('tips')">实用提醒</button>
+    </nav>
+
+    <section id="index" class="index">
+      <div class="index-card" onclick="scrollToSection('day1')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();scrollToSection('day1');}">
+        <div class="index-cover" style="background-image:url('https://images.unsplash.com/photo-1577223625816-7546f13df25d?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80')">
+          <span class="index-day">DAY 1</span>
+        </div>
+        <div class="index-body">
+          <h3>抵达 · 足球 · 海风</h3>
+          <p>从机场切进巴塞罗那节奏，诺坎普朝圣，最后在 Barceloneta 海边吹风看日落。</p>
+          <div class="chips"><span class="chip">Camp Nou</span><span class="chip">Barceloneta</span><span class="chip">海鲜饭</span></div>
+        </div>
+      </div>
+      <div class="index-card" onclick="scrollToSection('day2')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();scrollToSection('day2');}">
+        <div class="index-cover" style="background-image:url('https://images.unsplash.com/photo-1583422409516-2895a77efded?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80')">
+          <span class="index-day">DAY 2</span>
+        </div>
+        <div class="index-body">
+          <h3>高迪宇宙暴击日</h3>
+          <p>圣家堂看光影，格拉西亚大道看建筑，米拉之家和巴特罗之家让审美值一路飙升。</p>
+          <div class="chips"><span class="chip">Sagrada Família</span><span class="chip">高迪</span><span class="chip">Passeig de Gràcia</span></div>
+        </div>
+      </div>
+      <div class="index-card" onclick="scrollToSection('day3')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();scrollToSection('day3');}">
+        <div class="index-cover" style="background-image:url('https://images.unsplash.com/photo-1523531294919-4bcd7c65e216?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80')">
+          <span class="index-day">DAY 3</span>
+        </div>
+        <div class="index-body">
+          <h3>老城散步与城市告别</h3>
+          <p>哥特区、波盖利亚市场、城堡公园，再用焦糖山的俯瞰视角给旅程收一个漂亮结尾。</p>
+          <div class="chips"><span class="chip">Gothic Quarter</span><span class="chip">Boqueria</span><span class="chip">Bunkers</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>出发前一分钟读懂这趟旅行</h2>
+      <p class="panel-lead">这份网页基于原始行程做了体验升级：我保留了你最核心的路线与餐厅建议，同时增加了更适合同行分享的旅行氛围描述、出行提醒、节奏建议和巴塞罗那城市感照片，让整份行程更像一张有温度的旅行海报。</p>
+      <div class="overview-grid">
+        <div class="overview-item"><b>🏨 住宿建议</b><span>Hotel Praktik Bakery / Hotel Jazz / Yeah Hostel Barcelona</span></div>
+        <div class="overview-item"><b>🚇 城市交通</b><span>72小时无限次公交+地铁卡，约 €26.3，强烈建议一落地就安排好。</span></div>
+        <div class="overview-item"><b>💶 行程气质</b><span>不赶路、不军训，主打建筑、海边、老城、美食与巴萨情绪价值。</span></div>
+        <div class="overview-item"><b>📸 旅行关键词</b><span>高迪、地中海、加泰罗尼亚、老城石巷、夕阳、海鲜饭。</span></div>
+      </div>
+    </section>
+
+    <section id="day1" class="day">
+      <div class="day-hero" style="background-image:url('https://images.unsplash.com/photo-1577223625816-7546f13df25d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80')">
+        <div class="day-hero-content">
+          <span class="day-tag">DAY 1 · 抵达城市情绪切换</span>
+          <h3>从机场到海风，第一天就把巴塞罗那氛围拉满</h3>
+          <p>今天不追求景点数量，而是迅速进入“这座城市很值得慢慢玩”的状态：球场、海滩、海鲜饭，三连击足够让人瞬间有旅行实感。</p>
+        </div>
+      </div>
+      <div class="timeline">
+        <article class="event">
+          <div class="time">12:00</div>
+          <h4>🛬 抵达巴塞罗那机场 → 入住酒店</h4>
+          <div class="meta">Aerobus → Catalonia 站 → 步行约 8 min</div>
+          <p>推荐把抵达后的体力优先留给“轻松进入状态”，Aerobus 省心直接，落地后不用马上研究复杂线路。到酒店放下行李，旅程才算真正开始。</p>
+        </article>
+        <article class="event">
+          <div class="time">13:30</div>
+          <h4>☕ 轻食午餐｜El Magnífico 附近</h4>
+          <div class="meta">预算约 €6–€10 / 人</div>
+          <p>第一顿不必太正式，咖啡、小食、面包就很够。重点是把身体时区和旅行情绪调回来，顺便在格拉西亚大道一带感受一下巴塞罗那城市表情。</p>
+        </article>
+        <article class="event">
+          <div class="time">14:30</div>
+          <h4>⚽ Camp Nou 巴萨球场参观</h4>
+          <div class="meta">L5 蓝线 → Collblanc｜门票约 €30 / 人</div>
+          <p>哪怕不是资深球迷，到了巴塞罗那也很难对巴萨毫无感觉。球场博物馆本身就足够有情绪价值，适合把这趟旅行的第一波兴奋点拉起来。</p>
+        </article>
+        <article class="event">
+          <div class="time">16:30</div>
+          <h4>🌊 Barceloneta 海滩散步</h4>
+          <div class="meta">L4 黄线 → Barceloneta</div>
+          <p>这段安排非常妙：在诺坎普之后立刻切到地中海海边，城市气质瞬间从“热血”变成“松弛”。傍晚来这里拍照、看海、发呆都很值。</p>
+        </article>
+        <article class="event">
+          <div class="time">18:30</div>
+          <h4>🥘 Can Majó 海鲜饭晚餐</h4>
+          <div class="meta">人均 €25–€35｜建议预约</div>
+          <p>第一晚就吃海鲜饭，是一种非常正确的打开方式。海边餐厅+加泰风味+一杯酒，几乎就是“我们真的到西班牙了”的宣告。</p>
+        </article>
+        <div class="tips">
+          <div class="tip"><b>今日关键词</b>先适应城市节奏，不要把第一天排得太满，海边散步比多塞一个景点更值。</div>
+          <div class="tip"><b>拍照提醒</b>海滩逆光日落时段最出片，浅色衣服会更适合海边氛围。</div>
+          <div class="tip"><b>预订提醒</b>Camp Nou 和晚餐都建议提前锁定，第一天顺畅会显著提升整趟旅行体验。</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="day2" class="day">
+      <div class="day-hero" style="background-image:url('https://images.unsplash.com/photo-1583422409516-2895a77efded?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80')">
+        <div class="day-hero-content">
+          <span class="day-tag">DAY 2 · 高迪浓度最高的一天</span>
+          <h3>圣家堂、格拉西亚大道、米拉之家：把巴塞罗那审美一次看够</h3>
+          <p>如果说第一天是“进入旅行”，第二天就是“进入巴塞罗那本体”。这一天的关键词只有一个：高迪。</p>
+        </div>
+      </div>
+      <div class="timeline">
+        <article class="event">
+          <div class="time">09:00</div>
+          <h4>🥐 早餐 @ 酒店楼下面包房</h4>
+          <div class="meta">预算 €5–€8 / 人</div>
+          <p>西班牙早晨不需要太复杂，一杯咖啡、一份面包、一个阳光很好的街角，就够让人以很舒服的状态开启高迪日。</p>
+        </article>
+        <article class="event">
+          <div class="time">09:30</div>
+          <h4>⛪ 圣家堂</h4>
+          <div class="meta">L2 紫线 → Sagrada Família｜门票约 €26 / 人</div>
+          <p>这里是整趟旅程的视觉高潮之一。建议把参观情绪重点放在“光”和“内部空间”上，而不是单纯打卡，因为真正震撼人的往往是走进去那一刻。</p>
+        </article>
+        <article class="event">
+          <div class="time">12:00</div>
+          <h4>🦞 La Paradeta 海鲜午餐</h4>
+          <div class="meta">人均 €25–€35｜自选海鲜现场做</div>
+          <p>这一餐很适合安排在圣家堂之后，节奏上会有一种“看完神作，再认真吃一顿”的满足感。新鲜海鲜现点现做，体验感很强。</p>
+        </article>
+        <article class="event">
+          <div class="time">14:00</div>
+          <h4>🏛 高迪建筑巡礼｜巴特罗之家 & 米拉之家</h4>
+          <div class="meta">Passeig de Gràcia｜米拉之家门票约 €29 / 人</div>
+          <p>这一段不是普通城市 walk，而是建筑控的天堂。即使只拍外观也已经很值；如果只能选一个进入，优先推荐米拉之家，空间和屋顶都很有记忆点。</p>
+        </article>
+        <article class="event">
+          <div class="time">16:30</div>
+          <h4>🍷 Bodega Joan 加泰风味晚餐</h4>
+          <div class="meta">人均 €28–€35｜建议预约</div>
+          <p>第二晚适合吃得更“在地”一些：番茄面包、加泰香肠、Cava 起泡酒，都是把“来都来了”发挥到位的好选择。</p>
+        </article>
+        <div class="tips">
+          <div class="tip"><b>抢票建议</b>圣家堂一定要提前订时段，尽量选上午光线好的时间，更容易看到内部彩色光影。</div>
+          <div class="tip"><b>步行体验</b>格拉西亚大道非常适合穿舒服但上镜的鞋，今天是高颜值 city walk 日。</div>
+          <div class="tip"><b>玩法建议</b>如果团队体力一般，今天不要再硬塞更多景点，专注高迪本身就足够精彩。</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="day3" class="day">
+      <div class="day-hero" style="background-image:url('https://images.unsplash.com/photo-1523531294919-4bcd7c65e216?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80')">
+        <div class="day-hero-content">
+          <span class="day-tag">DAY 3 · 最适合慢慢走、慢慢看的告别日</span>
+          <h3>老城、市场、公园与焦糖山，把巴塞罗那收进回忆里</h3>
+          <p>最后一天不需要再靠高强度刺激来证明精彩，真正好的结尾，是让这座城市在轻松的节奏里慢慢留下来。</p>
+        </div>
+      </div>
+      <div class="timeline">
+        <article class="event">
+          <div class="time">10:30</div>
+          <h4>🏰 哥特区轻漫步</h4>
+          <div class="meta">Barcelona Cathedral · 吻墙 · 老城街巷</div>
+          <p>哥特区最迷人的不是单一景点，而是整体氛围。石板路、窄巷、拐角、门洞、教堂钟声，都会让人觉得这里很适合“随便走走却很有内容”。</p>
+        </article>
+        <article class="event">
+          <div class="time">12:00</div>
+          <h4>🍇 波盖利亚市场午餐</h4>
+          <div class="meta">预算 €15–€25 / 人</div>
+          <p>这是巴塞罗那非常有代表性的市场体验，视觉上热闹、气味上丰富、适合边逛边吃。往里走几步，往往更地道，也更不容易踩“游客第一排”。</p>
+        </article>
+        <article class="event">
+          <div class="time">13:30</div>
+          <h4>🌳 Parc de la Ciutadella 城堡公园</h4>
+          <div class="meta">免费入园｜建议停留约 1.5 小时</div>
+          <p>前两天看建筑、看街区，今天给身体一点“绿意缓冲”。喷泉、公园、湖边、阳光，会让这段旅程在情绪上更完整。</p>
+        </article>
+        <article class="event">
+          <div class="time">16:00</div>
+          <h4>🌄 焦糖山俯瞰全城</h4>
+          <div class="meta">Bunkers del Carmel｜城市收尾机位</div>
+          <p>这里很适合作为巴塞罗那的“记忆封面”。从高处俯瞰整座城，前两天走过的地方会突然有了整体感：海、塔、街区、山丘，全部串起来了。</p>
+        </article>
+        <article class="event">
+          <div class="time">17:30</div>
+          <h4>🍽 Can Culleretes 告别晚餐</h4>
+          <div class="meta">历史老店｜人均 €28–€35</div>
+          <p>最后一顿饭适合认真地吃。加泰炖菜、Crema Catalana，配上老店氛围，会让这趟短旅在味觉上有一个很像样的句号。</p>
+        </article>
+        <div class="tips">
+          <div class="tip"><b>今日节奏</b>今天最适合留白，不要把最后一天排成赶场，留一点时间给临时想逛的小店和路边惊喜。</div>
+          <div class="tip"><b>看城建议</b>焦糖山更适合傍晚前后去，光线柔和，城市层次感会更漂亮。</div>
+          <div class="tip"><b>纪念清单</b>最后一天可以顺手买点橄榄油、加泰小点心、冰箱贴，作为轻便纪念品。</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="food" class="panel">
+      <h2>巴塞罗那必须吃点什么</h2>
+      <p class="panel-lead">如果景点负责制造“哇”，那美食就是负责把这趟旅行真正落进记忆里的部分。</p>
+      <div class="food-grid">
+        <div class="food-card">
+          <div class="food-cover" style="background-image:url('https://images.unsplash.com/photo-1534080564583-6be75777b70a?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80')"></div>
+          <div class="food-body"><h4>🥘 海鲜饭 / 墨鱼饭</h4><p>第一顿想吃到“西班牙感”，就选它。海鲜鲜味和米饭香气是非常直接的快乐。</p></div>
+        </div>
+        <div class="food-card">
+          <div class="food-cover" style="background-image:url('https://images.unsplash.com/photo-1515443961218-a51367888e4b?auto=format&fit=crop&w=900&q=80')"></div>
+          <div class="food-body"><h4>🍤 Tapas 小食</h4><p>最适合多人一起点着吃，桌上越摆越满，旅行氛围就会越浓。</p></div>
+        </div>
+        <div class="food-card">
+          <div class="food-cover" style="background-image:url('https://images.unsplash.com/photo-1551538827-9c037cb4f32a?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80')"></div>
+          <div class="food-body"><h4>🍷 Cava / Sangria</h4><p>加泰起泡酒和西班牙水果酒都很适合旅行情绪，轻松、上镜、好入口。</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tips" class="panel">
+      <h2>实用提醒</h2>
+      <p class="panel-lead">让旅程更顺的，除了景点和餐厅，还有那些看起来不起眼但真的有用的小细节。</p>
+      <div class="practical-grid">
+        <div class="practical-card">
+          <div class="practical-cover" style="background-image:url('https://images.unsplash.com/photo-1524661135-423995f22d0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+          <div class="practical-body"><h4>🚇 交通</h4><p>72h 卡很划算，机场快线 + 市内地铁衔接顺畅，短途自由度很高。</p></div>
+        </div>
+        <div class="practical-card">
+          <div class="practical-cover" style="background-image:url('https://images.unsplash.com/photo-1517760444937-f6397edcbbcd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+          <div class="practical-body"><h4>👜 安全</h4><p>热门区域注意随身物品，尤其地铁、市场和海边，手机背包尽量放前侧。</p></div>
+        </div>
+        <div class="practical-card">
+          <div class="practical-cover" style="background-image:url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+          <div class="practical-body"><h4>☕ 作息</h4><p>西班牙晚餐普遍偏晚，下午节奏慢一点很正常，不必用国内节奏理解这座城。</p></div>
+        </div>
+        <div class="practical-card">
+          <div class="practical-cover" style="background-image:url('https://images.unsplash.com/photo-1519046904884-53103b34b206?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+          <div class="practical-body"><h4>🌤 穿搭</h4><p>适合带轻薄外套、好走的鞋，海边和山顶傍晚有风，拍照时浅色系更出片。</p></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <b>Barcelona is calling.</b>
+    <span>把这条链接发给同行人吧，让期待值先于航班起飞。</span>
+  </footer>
+  <script>
+    function scrollToSection(id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  </script>
+</body>
+</html>
