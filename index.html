@@ -6,7 +6,7 @@
   <title>¡Hola Barcelona!｜10.3–10.5 巴塞罗那3日行程</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Noto+Sans+SC:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Poppins:wght@500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --red: #b22234;
@@ -32,6 +32,19 @@
         radial-gradient(circle at top left, rgba(244,180,0,.12), transparent 28%),
         radial-gradient(circle at top right, rgba(42,157,143,.12), transparent 26%),
         linear-gradient(180deg, #fffdf8 0%, #fff 100%);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,.18), transparent 22%),
+        radial-gradient(circle at 80% 10%, rgba(255,255,255,.10), transparent 18%);
+      mix-blend-mode: screen;
+      z-index: 0;
     }
 
     .hero {
@@ -39,7 +52,7 @@
       position: relative;
       overflow: hidden;
       background:
-        linear-gradient(rgba(10,25,47,.35), rgba(10,25,47,.52)),
+        linear-gradient(rgba(7,18,38,.28), rgba(7,18,38,.58)),
         url('https://images.unsplash.com/photo-1583422409516-2895a77efded?ixlib=rb-4.0.3&auto=format&fit=crop&w=1800&q=80') center/cover no-repeat;
       color: #fff;
       display: flex;
@@ -47,6 +60,18 @@
       justify-content: center;
       text-align: center;
       padding: 48px 20px 96px;
+      transform-origin: center;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: -8%;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(244,180,0,.16), transparent 24%),
+        radial-gradient(circle at 80% 20%, rgba(42,157,143,.18), transparent 20%),
+        linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
+      animation: heroFloat 18s ease-in-out infinite alternate;
     }
 
     .hero::after {
@@ -61,17 +86,25 @@
       position: relative;
       z-index: 1;
       max-width: 980px;
+      padding: 34px 34px 30px;
+      border-radius: 32px;
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.04));
+      border: 1px solid rgba(255,255,255,.16);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 30px 80px rgba(0,0,0,.20);
     }
 
     .badge {
       display: inline-block;
       padding: 8px 16px;
       border-radius: 999px;
-      background: rgba(255,255,255,.16);
-      border: 1px solid rgba(255,255,255,.28);
+      background: rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.22);
       backdrop-filter: blur(8px);
-      font-size: 14px;
-      letter-spacing: .08em;
+      font-size: 13px;
+      letter-spacing: .14em;
+      font-family: 'Poppins', sans-serif;
+      text-transform: uppercase;
     }
 
     h1 {
@@ -86,6 +119,8 @@
       font-size: clamp(18px, 2.4vw, 28px);
       font-weight: 700;
       margin: 0 0 12px;
+      color: rgba(255,255,255,.96);
+      letter-spacing: .02em;
     }
 
     .desc {
@@ -104,13 +139,39 @@
       gap: 16px;
     }
 
+    .hero-note {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .hero-note span {
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.16);
+      font-size: 12px;
+      letter-spacing: .08em;
+      font-family: 'Poppins', sans-serif;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.92);
+    }
+
     .hero-stat {
       min-width: 150px;
       padding: 16px 18px;
       border-radius: 18px;
-      background: rgba(255,255,255,.16);
-      border: 1px solid rgba(255,255,255,.22);
+      background: rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.20);
       backdrop-filter: blur(10px);
+      transition: transform .35s ease, background .35s ease;
+    }
+
+    .hero-stat:hover {
+      transform: translateY(-4px);
+      background: rgba(255,255,255,.18);
     }
 
     .hero-stat b {
@@ -136,10 +197,11 @@
       margin: 0 0 18px;
       padding: 12px;
       border-radius: 18px;
-      background: rgba(255,255,255,.84);
-      border: 1px solid rgba(255,255,255,.72);
-      backdrop-filter: blur(12px);
-      box-shadow: 0 10px 24px rgba(13,59,102,.10);
+      background: rgba(255,255,255,.78);
+      border: 1px solid rgba(255,255,255,.76);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 16px 36px rgba(13,59,102,.12);
+      transition: background .3s ease, box-shadow .3s ease, transform .3s ease;
     }
 
     .quick-link {
@@ -150,17 +212,21 @@
       border-radius: 999px;
       text-decoration: none;
       color: var(--blue);
-      background: #fff;
-      border: 1px solid rgba(13,59,102,.10);
-      font-size: 14px;
+      background: rgba(255,255,255,.78);
+      border: 1px solid rgba(13,59,102,.08);
+      font-size: 13px;
       font-weight: 800;
-      transition: transform .2s ease, background .2s ease, color .2s ease;
+      font-family: 'Poppins', sans-serif;
+      letter-spacing: .04em;
+      transition: transform .25s ease, background .25s ease, color .25s ease, box-shadow .25s ease;
+      cursor: pointer;
     }
 
     .quick-link:hover {
       transform: translateY(-2px);
       background: var(--blue);
       color: #fff;
+      box-shadow: 0 12px 22px rgba(13,59,102,.16);
     }
 
     .index {
@@ -173,61 +239,90 @@
     .index-card {
       text-decoration: none;
       color: inherit;
-      background: var(--card);
-      border: 1px solid rgba(255,255,255,.7);
-      backdrop-filter: blur(10px);
-      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(255,255,255,.94), rgba(255,255,255,.84));
+      border: 1px solid rgba(255,255,255,.78);
+      backdrop-filter: blur(12px);
+      border-radius: 28px;
       overflow: hidden;
-      box-shadow: var(--shadow);
-      transition: transform .25s ease, box-shadow .25s ease;
+      box-shadow: 0 18px 40px rgba(13,59,102,.12);
+      transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+      cursor: pointer;
     }
 
     .index-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 22px 48px rgba(13,59,102,.18);
+      transform: translateY(-10px);
+      box-shadow: 0 28px 54px rgba(13,59,102,.18);
+      border-color: rgba(244,180,0,.38);
     }
 
     .index-cover {
-      height: 160px;
+      height: 190px;
       background-size: cover;
       background-position: center;
       position: relative;
+      transform: scale(1);
+      transition: transform .6s ease;
+    }
+
+    .index-cover::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(10,25,47,.08), rgba(10,25,47,.34));
+    }
+
+    .index-card:hover .index-cover {
+      transform: scale(1.05);
     }
 
     .index-day {
       position: absolute;
       top: 14px;
       left: 14px;
+      z-index: 1;
       background: rgba(178,34,52,.92);
       color: #fff;
       font-weight: 800;
-      font-size: 13px;
+      font-size: 12px;
       padding: 8px 12px;
       border-radius: 999px;
-      letter-spacing: .06em;
+      letter-spacing: .12em;
+      font-family: 'Poppins', sans-serif;
     }
 
-    .index-body { padding: 18px 18px 20px; }
-    .index-body h3 { margin: 0 0 8px; font-size: 22px; color: var(--blue); }
-    .index-body p { margin: 0; color: var(--muted); line-height: 1.8; }
+    .index-body { padding: 22px 22px 24px; }
+    .index-body h3 {
+      margin: 0 0 10px;
+      font-size: 25px;
+      line-height: 1.2;
+      color: var(--blue);
+      font-family: 'Playfair Display', serif;
+    }
+    .index-body p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.9;
+      font-size: 14px;
+    }
     .chips { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px; }
     .chip {
       padding: 6px 10px;
       border-radius: 999px;
-      background: #fff4dd;
+      background: linear-gradient(180deg, #fff6df, #fff0cd);
       color: #9a5b00;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
+      letter-spacing: .03em;
     }
 
     .panel {
-      background: rgba(255,255,255,.78);
-      border: 1px solid rgba(255,255,255,.8);
-      border-radius: 28px;
-      box-shadow: var(--shadow);
-      padding: 28px;
+      background: linear-gradient(180deg, rgba(255,255,255,.82), rgba(255,255,255,.74));
+      border: 1px solid rgba(255,255,255,.82);
+      border-radius: 30px;
+      box-shadow: 0 24px 60px rgba(13,59,102,.10);
+      padding: 32px;
       margin-bottom: 34px;
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(12px);
     }
 
     .panel h2 {
@@ -240,7 +335,9 @@
     .panel-lead {
       margin: 0;
       color: var(--muted);
-      line-height: 1.9;
+      line-height: 1.95;
+      max-width: 860px;
+      font-size: 15px;
     }
 
     .overview-grid {
@@ -251,17 +348,33 @@
     }
 
     .overview-item {
-      background: white;
-      border-radius: 20px;
-      padding: 18px;
+      background: rgba(255,255,255,.94);
+      border-radius: 22px;
+      padding: 20px;
       border: 1px solid #f3efe7;
+      transition: transform .28s ease, box-shadow .28s ease;
+    }
+
+    .overview-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 34px rgba(13,59,102,.08);
     }
 
     .overview-item b {
       display: block;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
       color: var(--blue);
       font-size: 18px;
+    }
+
+    .overview-item small {
+      display: block;
+      margin-top: 10px;
+      color: var(--orange);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
     }
 
     .overview-item span {
@@ -276,17 +389,24 @@
     }
 
     .day-hero {
-      min-height: 280px;
-      border-radius: 30px;
+      min-height: 320px;
+      border-radius: 34px;
       overflow: hidden;
       position: relative;
       display: flex;
       align-items: flex-end;
-      padding: 28px;
+      padding: 34px;
       color: white;
-      box-shadow: var(--shadow);
+      box-shadow: 0 24px 54px rgba(13,59,102,.16);
       background-size: cover;
       background-position: center;
+      transform: translateZ(0);
+      transition: transform .45s ease, box-shadow .45s ease;
+    }
+
+    .day-hero:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 30px 62px rgba(13,59,102,.18);
     }
 
     .day-hero::before {
@@ -326,16 +446,44 @@
       color: rgba(255,255,255,.92);
     }
 
+    .timeline-intro {
+      margin: 18px 0 16px;
+      padding: 18px 20px;
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,249,239,.92));
+      border: 1px solid #f3e7cf;
+      box-shadow: 0 12px 28px rgba(13,59,102,.06);
+    }
+
+    .timeline-kicker {
+      margin-bottom: 8px;
+      color: var(--orange);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .timeline-intro p {
+      margin: 0;
+      color: #5b6472;
+      line-height: 1.95;
+      font-size: 15px;
+    }
+
     .timeline {
       margin-top: 18px;
       position: relative;
-      padding-left: 30px;
+      padding-left: 44px;
+      overflow: visible;
     }
+
 
     .timeline::before {
       content: "";
       position: absolute;
-      left: 10px;
+      left: 16px;
       top: 10px;
       bottom: 10px;
       width: 3px;
@@ -345,18 +493,24 @@
 
     .event {
       position: relative;
-      background: white;
+      background: rgba(255,255,255,.96);
       border-radius: 24px;
-      padding: 20px 20px 18px;
+      padding: 22px 22px 20px;
       margin: 0 0 18px;
-      box-shadow: 0 10px 30px rgba(13,59,102,.08);
-      border: 1px solid #f3efe7;
+      box-shadow: 0 16px 36px rgba(13,59,102,.08);
+      border: 1px solid rgba(243,239,231,.95);
+      transition: transform .28s ease, box-shadow .28s ease;
+    }
+
+    .event:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 24px 42px rgba(13,59,102,.11);
     }
 
     .event::before {
       content: "";
       position: absolute;
-      left: -27px;
+      left: -34px;
       top: 28px;
       width: 14px;
       height: 14px;
@@ -430,17 +584,30 @@
     .practical-grid { grid-template-columns: repeat(4, 1fr); }
 
     .food-card, .practical-card {
-      background: white;
-      border-radius: 22px;
+      background: rgba(255,255,255,.96);
+      border-radius: 24px;
       overflow: hidden;
       border: 1px solid #f3efe7;
-      box-shadow: 0 10px 28px rgba(13,59,102,.08);
+      box-shadow: 0 14px 32px rgba(13,59,102,.08);
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+
+    .food-card:hover, .practical-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 42px rgba(13,59,102,.12);
     }
 
     .food-cover, .practical-cover {
-      height: 160px;
+      height: 180px;
       background-size: cover;
       background-position: center;
+      transform: scale(1);
+      transition: transform .6s ease;
+    }
+
+    .food-card:hover .food-cover,
+    .practical-card:hover .practical-cover {
+      transform: scale(1.06);
     }
 
     .food-body, .practical-body { padding: 16px 18px 18px; }
@@ -457,10 +624,45 @@
       font-size: 14px;
     }
 
+    .food-body small, .practical-body small {
+      display: block;
+      margin-top: 10px;
+      color: var(--orange);
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.7;
+    }
+
+    @keyframes heroFloat {
+      0% { transform: translate3d(0, 0, 0) scale(1); }
+      100% { transform: translate3d(0, 18px, 0) scale(1.04); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .75s ease, transform .75s ease;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .quick-nav.is-scrolled {
+      background: rgba(255,255,255,.90);
+      box-shadow: 0 18px 38px rgba(13,59,102,.16);
+      transform: translateY(0);
+    }
+
     .footer {
-      padding: 30px 20px 70px;
+      padding: 30px 20px 84px;
       text-align: center;
       color: var(--muted);
+      position: relative;
+      z-index: 1;
+      max-width: 980px;
+      margin: 0 auto;
     }
 
     .footer b {
@@ -469,6 +671,21 @@
       font-size: 24px;
       margin-bottom: 8px;
       font-family: 'Playfair Display', serif;
+    }
+
+    .footer span {
+      display: block;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .footer p {
+      margin: 14px auto 0;
+      max-width: 760px;
+      color: #687385;
+      line-height: 1.95;
+      font-size: 15px;
+      text-align: center;
     }
 
     @media (max-width: 1024px) {
@@ -490,17 +707,21 @@
       .overview-grid {
         grid-template-columns: 1fr;
       }
-      .timeline { padding-left: 22px; }
-      .event::before { left: -21px; }
+      .timeline { padding-left: 34px; }
+      .timeline::before { left: 10px; }
+      .event::before { left: -26px; }
       .shell { margin-top: -44px; }
       .panel { padding: 20px; }
       .day-hero { min-height: 240px; padding: 20px; }
+      .hero-inner { padding: 26px 20px 24px; }
+      .quick-nav { top: 10px; }
+      .index-cover, .food-cover, .practical-cover { height: 170px; }
     }
   </style>
 </head>
 <body>
   <div id="top"></div>
-  <section class="hero">
+  <section class="hero reveal">
     <div class="hero-inner">
       <div class="badge">BARCELONA · OCT 3 – OCT 5 · 国庆特别版</div>
       <h1>¡Hola Barcelona!</h1>
@@ -513,6 +734,12 @@
         <div class="hero-stat"><b>10+</b><span>景点与体验</span></div>
         <div class="hero-stat"><b>72h</b><span>城市交通卡</span></div>
         <div class="hero-stat"><b>∞</b><span>期待值拉满</span></div>
+      </div>
+      <div class="hero-note">
+        <span>Architecture</span>
+        <span>Mediterranean Breeze</span>
+        <span>Gaudí Moments</span>
+        <span>Tapas & Sunset</span>
       </div>
     </div>
   </section>
@@ -528,7 +755,7 @@
       <button class="quick-link" type="button" onclick="scrollToSection('tips')">实用提醒</button>
     </nav>
 
-    <section id="index" class="index">
+    <section id="index" class="index reveal">
       <div class="index-card" onclick="scrollToSection('day1')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();scrollToSection('day1');}">
         <div class="index-cover" style="background-image:url('https://images.unsplash.com/photo-1577223625816-7546f13df25d?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80')">
           <span class="index-day">DAY 1</span>
@@ -561,18 +788,18 @@
       </div>
     </section>
 
-    <section class="panel">
+    <section class="panel reveal">
       <h2>出发前一分钟读懂这趟旅行</h2>
       <p class="panel-lead">这份网页基于原始行程做了体验升级：我保留了你最核心的路线与餐厅建议，同时增加了更适合同行分享的旅行氛围描述、出行提醒、节奏建议和巴塞罗那城市感照片，让整份行程更像一张有温度的旅行海报。</p>
       <div class="overview-grid">
-        <div class="overview-item"><b>🏨 住宿建议</b><span>Hotel Praktik Bakery / Hotel Jazz / Yeah Hostel Barcelona</span></div>
-        <div class="overview-item"><b>🚇 城市交通</b><span>72小时无限次公交+地铁卡，约 €26.3，强烈建议一落地就安排好。</span></div>
-        <div class="overview-item"><b>💶 行程气质</b><span>不赶路、不军训，主打建筑、海边、老城、美食与巴萨情绪价值。</span></div>
-        <div class="overview-item"><b>📸 旅行关键词</b><span>高迪、地中海、加泰罗尼亚、老城石巷、夕阳、海鲜饭。</span></div>
+        <div class="overview-item"><b>🏨 住宿建议</b><span>Hotel Praktik Bakery / Hotel Jazz / Yeah Hostel Barcelona，优先住在 Eixample 或加泰罗尼亚广场附近，出门就能接上整座城市的节奏。</span><small>Stay in Eixample</small></div>
+        <div class="overview-item"><b>🚇 城市交通</b><span>72 小时无限次公交+地铁卡约 €26.3，落地就买最省心。机场快线、地铁、步行能把三天路线串得非常顺。</span><small>Best value pass</small></div>
+        <div class="overview-item"><b>💶 行程气质</b><span>不是特种兵打卡，也不是纯摆烂度假，而是建筑、海风、老城、美食和一点点巴萨情绪价值的平衡版本。</span><small>Slow but rich</small></div>
+        <div class="overview-item"><b>📸 旅行关键词</b><span>高迪、地中海、加泰罗尼亚、老城石巷、夕阳、海鲜饭。每一天都适合拍照，也都适合认真感受城市质地。</span><small>Visual memory list</small></div>
       </div>
     </section>
 
-    <section id="day1" class="day">
+    <section id="day1" class="day reveal">
       <div class="day-hero" style="background-image:url('https://images.unsplash.com/photo-1577223625816-7546f13df25d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80')">
         <div class="day-hero-content">
           <span class="day-tag">DAY 1 · 抵达城市情绪切换</span>
@@ -580,9 +807,11 @@
           <p>今天不追求景点数量，而是迅速进入“这座城市很值得慢慢玩”的状态：球场、海滩、海鲜饭，三连击足够让人瞬间有旅行实感。</p>
         </div>
       </div>
+      <div class="timeline-intro">
+        <div class="timeline-kicker">Arrival mood · football energy · sea breeze</div>
+        <p>第一天更像是和巴塞罗那打招呼：不用急着证明效率，而是先让身体和情绪都切进这座城的节奏。球场的热血、海边的松弛和第一顿像样的西班牙晚餐，会让整趟旅程从一开始就很有“来对了”的感觉。</p>
+      </div>
       <div class="timeline">
-        <article class="event">
-          <div class="time">12:00</div>
           <h4>🛬 抵达巴塞罗那机场 → 入住酒店</h4>
           <div class="meta">Aerobus → Catalonia 站 → 步行约 8 min</div>
           <p>推荐把抵达后的体力优先留给“轻松进入状态”，Aerobus 省心直接，落地后不用马上研究复杂线路。到酒店放下行李，旅程才算真正开始。</p>
@@ -619,7 +848,7 @@
       </div>
     </section>
 
-    <section id="day2" class="day">
+    <section id="day2" class="day reveal">
       <div class="day-hero" style="background-image:url('https://images.unsplash.com/photo-1583422409516-2895a77efded?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80')">
         <div class="day-hero-content">
           <span class="day-tag">DAY 2 · 高迪浓度最高的一天</span>
@@ -627,9 +856,11 @@
           <p>如果说第一天是“进入旅行”，第二天就是“进入巴塞罗那本体”。这一天的关键词只有一个：高迪。</p>
         </div>
       </div>
+      <div class="timeline-intro">
+        <div class="timeline-kicker">Gaudí day · light & texture · city walk</div>
+        <p>第二天是这趟旅程审美浓度最高的一天。你会从圣家堂的光影进入高迪宇宙，再顺着格拉西亚大道把建筑、街景和散步体验一次吃透。今天不只是看景点，而是在认真感受“为什么巴塞罗那会让这么多人一来就上头”。</p>
+      </div>
       <div class="timeline">
-        <article class="event">
-          <div class="time">09:00</div>
           <h4>🥐 早餐 @ 酒店楼下面包房</h4>
           <div class="meta">预算 €5–€8 / 人</div>
           <p>西班牙早晨不需要太复杂，一杯咖啡、一份面包、一个阳光很好的街角，就够让人以很舒服的状态开启高迪日。</p>
@@ -666,7 +897,7 @@
       </div>
     </section>
 
-    <section id="day3" class="day">
+    <section id="day3" class="day reveal">
       <div class="day-hero" style="background-image:url('https://images.unsplash.com/photo-1523531294919-4bcd7c65e216?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80')">
         <div class="day-hero-content">
           <span class="day-tag">DAY 3 · 最适合慢慢走、慢慢看的告别日</span>
@@ -674,9 +905,11 @@
           <p>最后一天不需要再靠高强度刺激来证明精彩，真正好的结尾，是让这座城市在轻松的节奏里慢慢留下来。</p>
         </div>
       </div>
+      <div class="timeline-intro">
+        <div class="timeline-kicker">Old town farewell · market life · golden hour</div>
+        <p>最后一天适合把节奏故意放慢一点。老城街巷、市场烟火、公园留白和焦糖山的高处视角，会让这座城市在结束前变得更完整。它不是最炸裂的一天，却很可能是最容易留在回忆里的一天。</p>
+      </div>
       <div class="timeline">
-        <article class="event">
-          <div class="time">10:30</div>
           <h4>🏰 哥特区轻漫步</h4>
           <div class="meta">Barcelona Cathedral · 吻墙 · 老城街巷</div>
           <p>哥特区最迷人的不是单一景点，而是整体氛围。石板路、窄巷、拐角、门洞、教堂钟声，都会让人觉得这里很适合“随便走走却很有内容”。</p>
@@ -713,52 +946,53 @@
       </div>
     </section>
 
-    <section id="food" class="panel">
+    <section id="food" class="panel reveal">
       <h2>巴塞罗那必须吃点什么</h2>
       <p class="panel-lead">如果景点负责制造“哇”，那美食就是负责把这趟旅行真正落进记忆里的部分。</p>
       <div class="food-grid">
         <div class="food-card">
           <div class="food-cover" style="background-image:url('https://images.unsplash.com/photo-1534080564583-6be75777b70a?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80')"></div>
-          <div class="food-body"><h4>🥘 海鲜饭 / 墨鱼饭</h4><p>第一顿想吃到“西班牙感”，就选它。海鲜鲜味和米饭香气是非常直接的快乐。</p></div>
+          <div class="food-body"><h4>🥘 海鲜饭 / 墨鱼饭</h4><p>第一顿想吃到“西班牙感”，就选它。海鲜鲜味和米饭香气是非常直接的快乐。</p><small>推荐放在 Day 1 或 Day 3 傍晚，仪式感最强。</small></div>
         </div>
         <div class="food-card">
           <div class="food-cover" style="background-image:url('https://images.unsplash.com/photo-1515443961218-a51367888e4b?auto=format&fit=crop&w=900&q=80')"></div>
-          <div class="food-body"><h4>🍤 Tapas 小食</h4><p>最适合多人一起点着吃，桌上越摆越满，旅行氛围就会越浓。</p></div>
+          <div class="food-body"><h4>🍤 Tapas 小食</h4><p>最适合多人一起点着吃，桌上越摆越满，旅行氛围就会越浓。</p><small>适合多人分食，边聊边吃，最有“旅行正在发生”的感觉。</small></div>
         </div>
         <div class="food-card">
           <div class="food-cover" style="background-image:url('https://images.unsplash.com/photo-1551538827-9c037cb4f32a?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80')"></div>
-          <div class="food-body"><h4>🍷 Cava / Sangria</h4><p>加泰起泡酒和西班牙水果酒都很适合旅行情绪，轻松、上镜、好入口。</p></div>
+          <div class="food-body"><h4>🍷 Cava / Sangria</h4><p>加泰起泡酒和西班牙水果酒都很适合旅行情绪，轻松、上镜、好入口。</p><small>拍照、庆祝、收尾都适合，尤其适合落日或晚餐时段。</small></div>
         </div>
       </div>
     </section>
 
-    <section id="tips" class="panel">
+    <section id="tips" class="panel reveal">
       <h2>实用提醒</h2>
       <p class="panel-lead">让旅程更顺的，除了景点和餐厅，还有那些看起来不起眼但真的有用的小细节。</p>
       <div class="practical-grid">
         <div class="practical-card">
           <div class="practical-cover" style="background-image:url('https://images.unsplash.com/photo-1524661135-423995f22d0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
-          <div class="practical-body"><h4>🚇 交通</h4><p>72h 卡很划算，机场快线 + 市内地铁衔接顺畅，短途自由度很高。</p></div>
+          <div class="practical-body"><h4>🚇 交通</h4><p>72h 卡很划算，机场快线 + 市内地铁衔接顺畅，短途自由度很高。</p><small>如果住在 Eixample 一带，大多数路线会更顺，打车需求也会明显减少。</small></div>
         </div>
         <div class="practical-card">
           <div class="practical-cover" style="background-image:url('https://images.unsplash.com/photo-1517760444937-f6397edcbbcd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
-          <div class="practical-body"><h4>👜 安全</h4><p>热门区域注意随身物品，尤其地铁、市场和海边，手机背包尽量放前侧。</p></div>
+          <div class="practical-body"><h4>👜 安全</h4><p>热门区域注意随身物品，尤其地铁、市场和海边，手机背包尽量放前侧。</p><small>最重要的不是紧张，而是别在最热闹的地方把注意力全放到拍照上。</small></div>
         </div>
         <div class="practical-card">
           <div class="practical-cover" style="background-image:url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
-          <div class="practical-body"><h4>☕ 作息</h4><p>西班牙晚餐普遍偏晚，下午节奏慢一点很正常，不必用国内节奏理解这座城。</p></div>
+          <div class="practical-body"><h4>☕ 作息</h4><p>西班牙晚餐普遍偏晚，下午节奏慢一点很正常，不必用国内节奏理解这座城。</p><small>午后稍微放慢一点，晚上才更有状态去享受真正属于西班牙的用餐节奏。</small></div>
         </div>
         <div class="practical-card">
           <div class="practical-cover" style="background-image:url('https://images.unsplash.com/photo-1519046904884-53103b34b206?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
-          <div class="practical-body"><h4>🌤 穿搭</h4><p>适合带轻薄外套、好走的鞋，海边和山顶傍晚有风，拍照时浅色系更出片。</p></div>
+          <div class="practical-body"><h4>🌤 穿搭</h4><p>适合带轻薄外套、好走的鞋，海边和山顶傍晚有风，拍照时浅色系更出片。</p><small>如果想兼顾 city walk 和拍照，舒服的鞋比多带一套衣服更重要。</small></div>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
+  <footer class="footer reveal">
     <b>Barcelona is calling.</b>
     <span>把这条链接发给同行人吧，让期待值先于航班起飞。</span>
+    <p>如果一座城市值得在三天里被认真体验一次，那巴塞罗那一定在名单里：它有建筑的戏剧感，也有海风带来的松弛感，还有让人很难不开心的食物、街道与落日。</p>
   </footer>
   <script>
     function scrollToSection(id) {
@@ -766,6 +1000,40 @@
       if (!el) return;
       el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
+
+    function updateHeroParallax() {
+      var hero = document.querySelector('.hero');
+      var nav = document.querySelector('.quick-nav');
+      if (!hero) return;
+      var y = window.scrollY || window.pageYOffset;
+      hero.style.backgroundPosition = 'center ' + (y * 0.18) + 'px';
+      if (nav) {
+        if (y > 36) nav.classList.add('is-scrolled');
+        else nav.classList.remove('is-scrolled');
+      }
+    }
+
+    function setupReveal() {
+      var items = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) {
+        items.forEach(function(item) { item.classList.add('is-visible'); });
+        return;
+      }
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+          }
+        });
+      }, { threshold: 0.14 });
+      items.forEach(function(item) { observer.observe(item); });
+    }
+
+    window.addEventListener('scroll', updateHeroParallax, { passive: true });
+    window.addEventListener('load', function() {
+      updateHeroParallax();
+      setupReveal();
+    });
   </script>
 </body>
-</html> 
+</html>
