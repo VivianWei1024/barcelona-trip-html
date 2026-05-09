@@ -47,6 +47,20 @@
       z-index: 0;
     }
 
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .08;
+      background-image:
+        linear-gradient(rgba(255,255,255,.16) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.12) 1px, transparent 1px);
+      background-size: 4px 4px, 4px 4px;
+      mix-blend-mode: soft-light;
+      z-index: 0;
+    }
+
     .hero {
       min-height: 100vh;
       position: relative;
@@ -72,6 +86,7 @@
         radial-gradient(circle at 80% 20%, rgba(42,157,143,.18), transparent 20%),
         linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
       animation: heroFloat 18s ease-in-out infinite alternate;
+      will-change: transform;
     }
 
     .hero::after {
@@ -92,6 +107,8 @@
       border: 1px solid rgba(255,255,255,.16);
       backdrop-filter: blur(10px);
       box-shadow: 0 30px 80px rgba(0,0,0,.20);
+      transform-style: preserve-3d;
+      transition: transform .18s ease-out;
     }
 
     .badge {
@@ -105,6 +122,7 @@
       letter-spacing: .14em;
       font-family: 'Poppins', sans-serif;
       text-transform: uppercase;
+      transform: translateZ(22px);
     }
 
     h1 {
@@ -113,6 +131,7 @@
       margin: 18px 0 12px;
       line-height: 1.02;
       text-shadow: 0 8px 28px rgba(0,0,0,.18);
+      transform: translateZ(46px);
     }
 
     .subtitle {
@@ -121,6 +140,7 @@
       margin: 0 0 12px;
       color: rgba(255,255,255,.96);
       letter-spacing: .02em;
+      transform: translateZ(28px);
     }
 
     .desc {
@@ -129,6 +149,7 @@
       font-size: 17px;
       line-height: 1.9;
       color: rgba(255,255,255,.92);
+      transform: translateZ(20px);
     }
 
     .hero-stats {
@@ -137,6 +158,7 @@
       justify-content: center;
       flex-wrap: wrap;
       gap: 16px;
+      transform: translateZ(24px);
     }
 
     .hero-note {
@@ -145,6 +167,7 @@
       flex-wrap: wrap;
       justify-content: center;
       gap: 10px;
+      transform: translateZ(18px);
     }
 
     .hero-note span {
@@ -638,15 +661,44 @@
       100% { transform: translate3d(0, 18px, 0) scale(1.04); }
     }
 
+    @keyframes orbDrift {
+      0% { transform: translate3d(0, 0, 0) scale(1); }
+      100% { transform: translate3d(18px, -12px, 0) scale(1.08); }
+    }
+
     .reveal {
       opacity: 0;
-      transform: translateY(24px);
+      transform: translateY(30px) scale(.985);
       transition: opacity .75s ease, transform .75s ease;
     }
 
     .reveal.is-visible {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(0) scale(1);
+    }
+
+    .event.reveal {
+      transform: translateX(26px) scale(.985);
+    }
+
+    .event.reveal.is-visible {
+      transform: translateX(0) scale(1);
+    }
+
+    .food-card.reveal,
+    .practical-card.reveal,
+    .overview-item.reveal,
+    .tip.reveal,
+    .index-card.reveal {
+      transform: translateY(28px) scale(.97);
+    }
+
+    .food-card.reveal.is-visible,
+    .practical-card.reveal.is-visible,
+    .overview-item.reveal.is-visible,
+    .tip.reveal.is-visible,
+    .index-card.reveal.is-visible {
+      transform: translateY(0) scale(1);
     }
 
     .quick-nav.is-scrolled {
@@ -655,22 +707,39 @@
       transform: translateY(0);
     }
 
-    .footer {
-      padding: 30px 20px 84px;
-      text-align: center;
-      color: var(--muted);
-      position: relative;
-      z-index: 1;
-      max-width: 980px;
-      margin: 0 auto;
+    .ambient-orb {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(2px);
+      opacity: .55;
+      animation: orbDrift 12s ease-in-out infinite alternate;
+    }
+
+    .ambient-orb.sun {
+      width: 150px;
+      height: 150px;
+      top: 12%;
+      right: 10%;
+      background: radial-gradient(circle, rgba(255,215,108,.88) 0%, rgba(255,215,108,.24) 55%, rgba(255,215,108,0) 76%);
+    }
+
+    .ambient-orb.sea {
+      width: 210px;
+      height: 210px;
+      left: 7%;
+      bottom: 16%;
+      background: radial-gradient(circle, rgba(42,157,143,.24) 0%, rgba(42,157,143,.10) 46%, rgba(42,157,143,0) 74%);
+      animation-duration: 16s;
     }
 
     .footer b {
       display: block;
       color: var(--blue);
       font-size: 24px;
-      margin-bottom: 8px;
+      margin: 0 auto 8px;
       font-family: 'Playfair Display', serif;
+      text-align: center;
     }
 
     .footer span {
@@ -679,11 +748,17 @@
       text-align: center;
     }
 
+    .footer-title {
+      display: block;
+      width: 100%;
+      text-align: center;
+    }
+
     .footer p {
-      margin: 14px auto 0;
-      max-width: 760px;
+      margin: 18px auto 0;
+      max-width: 620px;
       color: #687385;
-      line-height: 1.95;
+      line-height: 2;
       font-size: 15px;
       text-align: center;
     }
@@ -722,6 +797,8 @@
 <body>
   <div id="top"></div>
   <section class="hero reveal">
+    <div class="ambient-orb sun"></div>
+    <div class="ambient-orb sea"></div>
     <div class="hero-inner">
       <div class="badge">BARCELONA · OCT 3 – OCT 5 · 国庆特别版</div>
       <h1>¡Hola Barcelona!</h1>
@@ -910,6 +987,8 @@
         <p>最后一天适合把节奏故意放慢一点。老城街巷、市场烟火、公园留白和焦糖山的高处视角，会让这座城市在结束前变得更完整。它不是最炸裂的一天，却很可能是最容易留在回忆里的一天。</p>
       </div>
       <div class="timeline">
+        <article class="event">
+          <div class="time">10:30</div>
           <h4>🏰 哥特区轻漫步</h4>
           <div class="meta">Barcelona Cathedral · 吻墙 · 老城街巷</div>
           <p>哥特区最迷人的不是单一景点，而是整体氛围。石板路、窄巷、拐角、门洞、教堂钟声，都会让人觉得这里很适合“随便走走却很有内容”。</p>
@@ -990,9 +1069,10 @@
   </main>
 
   <footer class="footer reveal">
-    <b>Barcelona is calling.</b>
+    <b><span class="footer-title">Barcelona is calling.</span></b>
     <span>把这条链接发给同行人吧，让期待值先于航班起飞。</span>
-    <p>如果一座城市值得在三天里被认真体验一次，那巴塞罗那一定在名单里：它有建筑的戏剧感，也有海风带来的松弛感，还有让人很难不开心的食物、街道与落日。</p>
+    <p>如果一座城市值得被认真体验一次，
+      巴塞罗那一定在名单里：建筑、海风、街道与落日，都会让人很难不喜欢它。</p>
   </footer>
   <script>
     function scrollToSection(id) {
@@ -1014,7 +1094,7 @@
     }
 
     function setupReveal() {
-      var items = document.querySelectorAll('.reveal');
+      var items = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
       if (!('IntersectionObserver' in window)) {
         items.forEach(function(item) { item.classList.add('is-visible'); });
         return;
@@ -1022,17 +1102,48 @@
       var observer = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
           if (entry.isIntersecting) {
+            var delay = entry.target.dataset.delay || '0ms';
+            entry.target.style.transitionDelay = delay;
             entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
           }
         });
       }, { threshold: 0.14 });
       items.forEach(function(item) { observer.observe(item); });
     }
 
+    function assignRevealDelays() {
+      var groups = ['.index-card', '.overview-item', '.event', '.tip', '.food-card', '.practical-card'];
+      groups.forEach(function(selector) {
+        document.querySelectorAll(selector).forEach(function(item, index) {
+          item.classList.add('reveal');
+          item.dataset.delay = (index * 70) + 'ms';
+        });
+      });
+    }
+
+    function setupHeroMouseDepth() {
+      var hero = document.querySelector('.hero');
+      var inner = document.querySelector('.hero-inner');
+      if (!hero || !inner || window.innerWidth < 900) return;
+      hero.addEventListener('mousemove', function(e) {
+        var rect = hero.getBoundingClientRect();
+        var px = (e.clientX - rect.left) / rect.width - 0.5;
+        var py = (e.clientY - rect.top) / rect.height - 0.5;
+        hero.style.backgroundPosition = (50 + px * 3) + '% ' + (50 + py * 3) + '%';
+        inner.style.transform = 'rotateX(' + (-py * 4) + 'deg) rotateY(' + (px * 6) + 'deg)';
+      });
+      hero.addEventListener('mouseleave', function() {
+        inner.style.transform = 'rotateX(0deg) rotateY(0deg)';
+      });
+    }
+
     window.addEventListener('scroll', updateHeroParallax, { passive: true });
     window.addEventListener('load', function() {
+      assignRevealDelays();
       updateHeroParallax();
       setupReveal();
+      setupHeroMouseDepth();
     });
   </script>
 </body>
