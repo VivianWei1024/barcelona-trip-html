@@ -5,36 +5,34 @@ Overview：
 This project started from a simple trip document and evolved through multi-round collaboration between the user and AI. The goal was to create a webpage that feels closer to a real travel website than a plain itinerary.
 
 What the user provided：
-A 3-day Barcelona trip plan
-Visual direction: Spanish / Barcelona mood
-UX goal: vivid, fun, and anticipation-building
-Structural requirement: a top navigation index for each day
-Continuous feedback through screenshots and iteration notes
+1. A 3-day Barcelona trip plan
+2. Visual direction: Spanish / Barcelona mood
+3. UX goal: vivid, fun, and anticipation-building
+4. Structural requirement: a top navigation index for each day
+5. Continuous feedback through screenshots and iteration notes
 
 What the AI built：
-Immersive hero section
-Sticky quick navigation
-Clickable day index cards
-Day-by-day itinerary timeline
-Food recommendations
-Practical travel tips
-Smooth scrolling and lightweight UI interactions
-Single-file HTML for easy deployment
+1. Immersive hero section
+2. Sticky quick navigation
+3. Clickable day index cards
+4. Day-by-day itinerary timeline
+5. Food recommendations
+6. Practical travel tips
+7. Smooth scrolling and lightweight UI interactions
+8. Single-file HTML for easy deployment
 
 Iteration highlights：
 This project went through multiple refinement rounds, including:
-restoring and improving day navigation
-fixing non-working jump behavior
-removing mismatched end-of-day image sections
-upgrading the hero and overall UI polish
-improving card hover effects and scroll reveal
-enriching content while keeping the page lightweight
-fixing overlap, spacing, and alignment issues
+1. restoring and improving day navigation
+2. fixing non-working jump behavior
+3. removing mismatched end-of-day image sections
+4. upgrading the hero and overall UI polish
+5. improving card hover effects and scroll reveal
+6. enriching content while keeping the page lightweight
+7. fixing overlap, spacing, and alignment issues
 
 Tech stack：
-HTML
-CSS
-Vanilla JavaScript
+HTML、CSS、Vanilla JavaScript
 
 Deployment：
 This project is designed for static hosting such as GitHub Pages.
